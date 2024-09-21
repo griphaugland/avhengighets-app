@@ -1,13 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
-import { Picker } from "@react-native-picker/picker";
-import { storeAddictionItem, getAddictionItem } from "../services/storage";
+import { View, Text, Button, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import DropDownPicker from "react-native-dropdown-picker";
+import PencilIcon from "../components/icons/PencilIcon";
+import SmokeIcon from "../components/icons/SmokeIcon";
+import SnusIcon from "../components/icons/SnusIcon";
+import GamblingIcon from "../components/icons/GamblingIcon";
+import DrugsIcon from "../components/icons/DrugsIcon";
+import AlcoholIcon from "../components/icons/AlcoholIcon";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { styles } from "../style/styles";
 
 export default function HomeScreen({ navigation }) {
   const [addictionType, setAddictionType] = useState("");
   const [monthlyAmount, setMonthlyAmount] = useState("");
   const [yearlyAmount, setYearlyAmount] = useState(0);
   const [addiction, setAddiction] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [items, setItems] = useState([
+    { label: "Snus", value: "Snus", icon: () => <SnusIcon /> },
+    { label: "Røyk", value: "Røyk", icon: () => <SmokeIcon /> },
+    { label: "Pengespill", value: "Pengespill", icon: () => <GamblingIcon /> },
+    { label: "Rusmidler", value: "Rusmidler", icon: () => <DrugsIcon /> },
+    { label: "Alkohol", value: "Alkohol", icon: () => <AlcoholIcon /> },
+    { label: "Egendefinert", value: "Egendefinert", icon: () => <PencilIcon /> },
+  ]);
 
   useEffect(() => {
     // Fetch stored addiction items on component mount
@@ -31,23 +48,28 @@ export default function HomeScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Sett opp</Text>
+    <SafeAreaView style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.heading}>Sett opp</Text>
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <Ionicons name="menu" size={30} color="black" />
+        </TouchableOpacity>
+      </View>
 
       <Text style={styles.label}>Hva sliter du med?</Text>
-      <Picker
-        selectedValue={addictionType}
-        style={styles.input}
-        onValueChange={(itemValue) => setAddictionType(itemValue)}
-      >
-        <Picker.Item label="Velg din avhengighet" value="" />
-        <Picker.Item label="Snus" value="Snus" />
-        <Picker.Item label="Røyk" value="Røyk" />
-        <Picker.Item label="Pengespill" value="Pengespill" />
-        <Picker.Item label="Rusmidler" value="Rusmidler" />
-        <Picker.Item label="Alkohol" value="Alkohol" />
-        <Picker.Item label="Annet" value="Annet" />
-      </Picker>
+      <DropDownPicker
+        open={open}
+        value={addictionType}
+        items={items}
+        setOpen={setOpen}
+        setValue={setAddictionType}
+        setItems={setItems}
+        style={pickerSelectStyles}
+        placeholder="Velg din avhengighet"
+        dropDownContainerStyle={styles.dropdownContainer}
+        zIndex={1000}
+      />
 
       <Text style={styles.label}>Hvor mye bruker du på dette i måneden?</Text>
       <TextInput
@@ -77,42 +99,14 @@ export default function HomeScreen({ navigation }) {
         title="Gå til Kontakt"
         onPress={() => navigation.navigate("Contact")}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: "#fff",
-  },
-  heading: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 10,
-  },
-  input: {
-    height: 40,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-  },
-  result: {
-    fontSize: 16,
-    marginBottom: 20,
-  },
-  resultContainer: {
-    marginTop: 20,
-  },
-  resultTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-});
+const pickerSelectStyles = {
+  borderColor: "#ccc",
+  borderWidth: 1,
+  marginBottom: 20,
+  paddingHorizontal: 10,
+  height: 40,
+};
