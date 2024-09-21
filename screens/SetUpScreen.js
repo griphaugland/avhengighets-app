@@ -5,18 +5,18 @@ import { SafeAreaView } from "react-native-safe-area-context"; // Import SafeAre
 import { Ionicons } from "@expo/vector-icons"; // Import Ionicons for the menu icon
 import { styles } from "../style/styles"; // Ensure this path is correct and styles are exported properly
 
-export default function ContactScreen({ navigation }) {
+export default function SetUpScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container }>
       {/* Header with Menu Icon */}
       <View style={styles.header}>
-        <Text style={styles.heading}>Kontakt oss</Text>
+        <Text style={styles.heading}>Sett opp</Text>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <Ionicons name="menu" size={30} color="black" />
         </TouchableOpacity>
       </View>
 
-      <Text>Contact Screen</Text>
+      <Text>Set up Screen</Text>
     </SafeAreaView>
   );
 }
