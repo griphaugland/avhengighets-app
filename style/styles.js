@@ -7,6 +7,14 @@ export const styles = StyleSheet.create({
       backgroundColor: "white",
       height: "100%",
     },
+    centerContainer: {
+        flex: 1,
+        padding: 20,
+        justifyContent: "center",
+        paddingBottom: 100,
+        backgroundColor: "white",
+        height: "100%",
+    },
     header: {
       flexDirection: "row",
       justifyContent: "space-between",
@@ -45,6 +53,50 @@ export const styles = StyleSheet.create({
     dropdownContainer: {
       borderColor: "#ccc",
       borderWidth: 1,
-      height: 250,
+      height: 240,
+      maxHeight: 310,
     },
+    verticallySpaced: {
+        paddingTop: 4,
+        paddingBottom: 4,
+        alignSelf: 'stretch',
+      },
+      mt20: {
+        marginTop: 20,
+      },
+    greyFont: {
+        marginTop: 20,
+        color: "grey",
+        fontSize: 16,
+        fontWeight: "semi-bold",
+    },
+    errorText: {
+        color: "red",
+        fontSize: 16,
+        fontWeight: "semi-bold",
+    },
+    successText: {
+        color: "green",
+        fontSize: 16,
+        fontWeight: "semi-bold",
+    },
+    statusText: {
+        marginTop: 20,
+        color: "black",
+        fontSize: 16,
+        fontWeight: "semi-bold",
+    },
+    button: {
+        padding: 10,
+        backgroundColor: "#4883F6",
+        borderRadius: 5,
+        alignItems: "center",
+        justifyContent: "center",
+        height: 50,
+    },
+    buttonText: {
+        color: "white",
+        fontSize: 16,
+        fontWeight: "bold",
+    }
   });

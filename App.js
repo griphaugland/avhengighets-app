@@ -6,9 +6,11 @@ import Auth from './components/Auth'
 import Account from './components/Account'
 import { View } from 'react-native'
 import HomeScreen from './screens/HomeScreen';
-import ContactScreen from './screens/SetUpScreen';
+import SetUpScreen from './screens/SetUpScreen';
 import AddictionItemScreen from './screens/AddictionItemScreen';
 import CustomDrawerContent from './components/CustomDrawerContent'; // Import your custom drawer content component
+import LogInScreen from './screens/LogInScreen';
+import SignUpScreen from './screens/SignUpScreen';
 
 
 const Drawer = createDrawerNavigator();
@@ -40,8 +42,8 @@ export default function App() {
           options={{ headerShown: false }} // Hide header if not needed
         />
         <Drawer.Screen
-          name="Contact"
-          component={ContactScreen}
+          name="SetUp"
+          component={SetUpScreen}
           options={{ headerShown: false }} // Hide header if not needed
         />
         <Drawer.Screen
@@ -56,12 +58,17 @@ export default function App() {
     return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Home"
+        initialRouteName="Auth"
         drawerContent={(props) => <CustomDrawerContent {...props} />} // Use custom drawer content if needed
       >
         <Drawer.Screen
-          name="Auth"
-          component={Auth}
+          name="LogIn"
+          component={LogInScreen}
+          options={{ headerShown: false }} // Hide header if not needed
+        />
+        <Drawer.Screen
+          name="SignUp"
+          component={SignUpScreen}
           options={{ headerShown: false }} // Hide header if not needed
         />
        
